@@ -7,6 +7,21 @@
 </head>
 <body>
     <h1>Vista de la Cámara</h1>
-    <img src="{{ url_for('video') }}" width="100%" />
+    
+    <!-- Elemento de video para mostrar el stream -->
+    <video id="videoElement" width="100%" autoplay></video>
+
+    <script>
+        // Obtiene la cámara del usuario
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                // Asocia el flujo de video con el elemento de video en la página
+                var video = document.getElementById('videoElement');
+                video.srcObject = stream;
+            })
+            .catch(function(error) {
+                console.log("Error al acceder a la cámara: ", error);
+            });
+    </script>
 </body>
 </html>
